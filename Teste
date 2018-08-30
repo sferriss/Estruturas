@@ -1,6 +1,6 @@
 package estruturaga;
 
-public class EstruturaGa {
+public class Teste {
 
     public static void main(String[] args) {
 
@@ -12,19 +12,22 @@ public class EstruturaGa {
         a.insert(400, 10);
         a.insert(500, 9);
         a.insert(50, 15);
-        a.insert(40, a);
+        a.insert(40, 9);
         a.insert(600, 3);
         a.insert(95, 4);
         a.insert(620, 7);
         a.insert(350, 5);
         a.insert(67, 6);
-        a.insert(65, a);
+        a.insert(65, 50);
+        
         
 
         System.out.println(a.toString());
         System.out.println("Total de nós: " + a.countNodes());
         System.out.println("Total de  nós internos: " + a.countInternalNodes());
         System.out.println("Total de folhas: " + a.countLeaves());
+        System.out.println("Value da key: " + a.search(40));
+        System.out.println("Grau do nó: " + a.degree(50));
    
     }
 
