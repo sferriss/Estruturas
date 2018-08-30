@@ -76,7 +76,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
         return countLeaves(node.left) + countLeaves(node.right)
                 + ((node.isLeaf()) ? 1 : 0);
     }
-    
+
     //Verificar grau de um nó atraves de uma key
     public int degree(K key) {
 
@@ -98,6 +98,28 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
             }
         }
         return degree(key, node.next(key));
+    }
+
+    //Verificar grau da árvore
+    public int degreeTree() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return degreeTree(root);
+    }
+
+    private int degreeTree(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.left != null && node.right != null) {
+            return 2;
+        } else {
+            if (node.left != null || node.right != null) {
+                return 1;
+            }
+        }
+        return degreeTree(node.left) + degreeTree(node.right) + ((isEmpty() ? 1 : 0));
     }
 
     @Override
