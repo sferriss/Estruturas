@@ -431,38 +431,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
         return ancestors(node.next(key), key, aux);
     }
 
-//    public String descendents(K key) {
-//        if (isEmpty()) {
-//            return null;
-//        }
-//        Node node = searchN(key);
-//        SinglyLinkedList<K> list = new SinglyLinkedList<K>();
-//        return descendents(node, list);
-//
-//    }
-//
-//    private String descendents(Node node, SinglyLinkedList<K> list) {
-//        if (node.isLeaf()) {
-//            list.insertLast(node.key);
-//            return list.toString();
-//        } else if (node.right == null && node.left != null) {
-//            list.insertLast(node.key);
-//            return descendents(node.left, list);
-//        } else if (node.left == null && node.right != null) {
-//            list.insertLast(node.key);
-//            return descendents(node.right, list);
-//        } else {
-//            if (list.search(node.key) == (Integer) node.key) {
-//                descendents(node.left, list);
-//                descendents(node.right, list);
-//            } else {
-//                list.insertLast(node.key);
-//                descendents(node.right, list);
-//                descendents(node.left, list);
-//            }
-//        }
-//        return list.toString();
-//    }
     public String descendents(K key) {
         if (isEmpty()) {
             return null;
@@ -470,17 +438,52 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
         if (search(key) == null) {
             return null;
         }
-        return descendents(searchN(key));
+        Node node = searchN(key);
+        SinglyLinkedList<K> list = new SinglyLinkedList<K>();
+        return descendents(node, list);
+
     }
 
-    private String descendents(Node node) {
-        String aux = "";
-        if (node != null) {
-            System.out.print(node + " ");
-            preOrder(node.left);
-            preOrder(node.right);
+    private String descendents(Node node, SinglyLinkedList<K> list) {
+        if (node.isLeaf()) {
+            list.insertLast(node.key);
+            return list.toString();
+        } else if (node.right == null && node.left != null) {
+            list.insertLast(node.key);
+            return descendents(node.left, list);
+        } else if (node.left == null && node.right != null) {
+            list.insertLast(node.key);
+            return descendents(node.right, list);
+        } else {
+            if (list.search(node.key) == (Integer) node.key) {
+                descendents(node.left, list);
+                descendents(node.right, list);
+            } else {
+                list.insertLast(node.key);
+                descendents(node.right, list);
+                descendents(node.left, list);
+            }
         }
-        return aux += preOrder();
+        return list.toString();
     }
+//    public String descendents(K key) {
+//        if (isEmpty()) {
+//            return null;
+//        }
+//        if (search(key) == null) {
+//            return null;
+//        }
+//        return descendents(searchN(key));
+//    }
+//
+//    private String descendents(Node node) {
+//        String aux = "";
+//        if (node != null) {
+//            System.out.print(node + " ");
+//            preOrder(node.left);
+//            preOrder(node.right);
+//        }
+//        return aux += preOrder();
+//    }
 
 }
