@@ -250,6 +250,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
 
     }
 //Contar todos os nós
+
     @Override
     public int countNodes() {
         if (isEmpty()) {
@@ -299,7 +300,6 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
 
     //Verificar grau de um nó atraves de uma key
     public int degree(K key) {
-
         return degree(key, root);
     }
 
@@ -341,9 +341,8 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
         }
         return degreeTree(node.left) + degreeTree(node.right) + ((isEmpty() ? 1 : 0));
     }
-    
-    //Verificar Altura de um nó
 
+    //Verificar Altura de um nó
     public int height(K key) {
         if (isEmpty()) {
             return -1;
@@ -398,7 +397,7 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
         return 0;
 
     }
-    
+
     //Verificar Profundidade do nó
     public int depth(K key) {
         return depthP(key);
@@ -410,62 +409,26 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
         }
         return height(root) - height(searchN(key));
     }
-    
-    //Retornar Ancestrais
+
+    //Retorna os ancestrais de um nó específico.
     public String ancestors(K key) {
         if (isEmpty()) {
+            return null;
+        }
+        if (search(key) == null) {
             return null;
         }
         return ancestors(root, key, "");
     }
 
     private String ancestors(Node node, K key, String aux) {
-        if (search(key) == null) {
-            return null;
-        }
-        if (node.key == key) {
-            aux += " " + node.key;
-            return aux;
+        if (node.key.compareTo(key) == 0) {
+            return aux += " " + node.key;
         }
         aux += " " + node.key;
         return ancestors(node.next(key), key, aux);
     }
 
-    public String descendents(K key) {
-        if (isEmpty()) {
-            return null;
-        }
-        if (search(key) == null) {
-            return null;
-        }
-        Node node = searchN(key);
-        SinglyLinkedList<K> list = new SinglyLinkedList<K>();
-        return descendents(node, list);
-
-    }
-
-    private String descendents(Node node, SinglyLinkedList<K> list) {
-        if (node.isLeaf()) {
-            list.insertLast(node.key);
-            return list.toString();
-        } else if (node.right == null && node.left != null) {
-            list.insertLast(node.key);
-            return descendents(node.left, list);
-        } else if (node.left == null && node.right != null) {
-            list.insertLast(node.key);
-            return descendents(node.right, list);
-        } else {
-            if (list.search(node.key) == (Integer) node.key) {
-                descendents(node.left, list);
-                descendents(node.right, list);
-            } else {
-                list.insertLast(node.key);
-                descendents(node.right, list);
-                descendents(node.left, list);
-            }
-        }
-        return list.toString();
-    }
 //    public String descendents(K key) {
 //        if (isEmpty()) {
 //            return null;
@@ -473,17 +436,53 @@ public class BinarySearchTree<K extends Comparable<K>, V> implements BinarySearc
 //        if (search(key) == null) {
 //            return null;
 //        }
-//        return descendents(searchN(key));
+//        Node node = searchN(key);
+//        SinglyLinkedList<K> list = new SinglyLinkedList<K>();
+//        return descendents(node, list);
+//
 //    }
 //
-//    private String descendents(Node node) {
-//        String aux = "";
-//        if (node != null) {
-//            System.out.print(node + " ");
-//            preOrder(node.left);
-//            preOrder(node.right);
+//    private String descendents(Node node, SinglyLinkedList<K> list) {
+//        if (node.isLeaf()) {
+//            list.insertLast(node.key);
+//            return list.toString();
+//        } else if (node.right == null && node.left != null) {
+//            list.insertLast(node.key);
+//            return descendents(node.left, list);
+//        } else if (node.left == null && node.right != null) {
+//            list.insertLast(node.key);
+//            return descendents(node.right, list);
+//        } else {
+//            if (list.search(node.key) == (Integer) node.key) {
+//                descendents(node.left, list);
+//                descendents(node.right, list);
+//            } else {
+//                list.insertLast(node.key);
+//                descendents(node.right, list);
+//                descendents(node.left, list);
+//            }
 //        }
-//        return aux += preOrder();
+//        return list.toString();
 //    }
+    public String descendents(K key) {
+        if (isEmpty()) {
+            return null;
+        }
+        if (search(key) == null) {
+            return null;
+        }
+        return descendents(searchN(key), "");
+    }
+
+    private String descendents(Node node, String aux) {
+
+        if (node != null) {
+            aux += node + " ";
+            return descendents(node.left, aux) + descendents(node.right, aux);
+
+        }
+        return aux;
+
+    }
 
 }
