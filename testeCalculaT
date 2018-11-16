@@ -1,0 +1,38 @@
+package calculatemp;
+
+public class Teste {
+
+    public static void main(String[] args) {
+        calculaT t = new calculaT();
+
+        t.instancia(2048);
+//        t.imprime(t.getArrayAleatorioRep());
+        
+        t.quickSort((Comparable[]) t.getArrayAleatorioRep());
+        t.imprime(t.getArrayAleatorioRep());
+
+
+//        t.imprime(t.getArrayAleatorioRep());
+//        t.mergeSort((Comparable[]) t.getArrayAleatorioRep());
+//        t.imprime(t.getArrayAleatorioRep());
+//        t.repetido(t.getArrayAleatorioRep());
+//        System.out.println("Decrescente");
+//        t.imprime((Comparable[]) t.getArrayDescendente());
+//        System.out.println("Aleatorio rep");
+//           
+//        System.out.println("Ordenado rep");
+//        t.imprime((Comparable[]) t.getArrayAleatorioRep());
+//        t.repetido(t.getArrayAleatorioRep());
+//        t.imprime((Comparable[]) t.getArrayAleatorioRep());
+//        t.bubbleSort((Comparable[]) t.getArrayAleatorioRep());
+//        System.out.println(t.repetido((Comparable[]) t.getArrayAleatorioRep()));
+//        t.imprime((Comparable[]) t.getArrayAleatorio());
+//        t.heapSort((Comparable[]) t.getArrayAleatorio());
+//        System.out.println();
+//        t.imprime((Comparable[]) t.getArrayAleatorio());
+//        System.out.println();
+//        System.out.println(t.repetido(t.getArrayAleatorio()));
+        //t.imprime((Comparable[])t.getArrayDescendente());
+
+    }
+}
